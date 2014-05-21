@@ -1,4 +1,4 @@
-package network.packets;
+package net.packets;
 
 typedef Player = {
 	id: String,

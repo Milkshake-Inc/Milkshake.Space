@@ -25,7 +25,7 @@ class StartMenuScene extends Scene
 		singlePlayerButton.displayObject.click = function(data:InteractionData):Void
 		{
 			var game:GameScene = cast sceneManager.scenes.get("game");
-			game.isMultiplayer = false;
+			//game.isMultiplayer = false;
 			sceneManager.changeScene("game");
 		}
 		addNode(singlePlayerButton);
@@ -36,7 +36,7 @@ class StartMenuScene extends Scene
 		multiPlayerButton.displayObject.click = function(data:InteractionData):Void
 		{
 			var game:GameScene = cast sceneManager.scenes.get("game");
-			game.isMultiplayer = false;
+			//game.isMultiplayer = false;
 			sceneManager.changeScene("roomListScene");
 		}
 		

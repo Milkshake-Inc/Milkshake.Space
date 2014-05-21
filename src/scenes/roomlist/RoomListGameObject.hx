@@ -1,8 +1,8 @@
 package scenes.roomlist;
 import milkshake.core.GameObject;
 import milkshake.core.Text;
-import network.packets.room.Room;
-import network.packets.room.RoomList;
+import net.packets.room.Room;
+import net.packets.room.RoomList;
 import pixi.InteractionData;
 import scenes.roomlist.RoomItemContainer;
 

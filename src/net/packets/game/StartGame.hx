@@ -1,4 +1,4 @@
-package network.packets.game;
+package net.packets.game;
 
 /**
  * ...

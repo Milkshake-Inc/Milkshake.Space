@@ -3,9 +3,8 @@ import milkshake.core.Text;
 import milkshake.game.scene.Scene;
 import milkshake.game.ui.component.Button;
 import milkshake.IGameCore;
-import network.handlers.RoomHandler;
-import network.MilkshakeNetworkManager;
-import network.packets.room.RoomList;
+import net.handlers.RoomHandler;
+import net.packets.room.RoomList;
 import pixi.InteractionData;
 
 /**
@@ -18,11 +17,11 @@ class RoomListScene extends Scene
 	
 	private var roomHandler:RoomHandler;
 
-	public function new(game:IGameCore, networkManager:MilkshakeNetworkManager)
+	public function new(game:IGameCore, roomHandler:RoomHandler)
 	{
 		super(game, "RoomListScene");
-		roomHandler = networkManager.roomHandler;
-		roomHandler.onRoomsLoadedCallback = onRoomsLoaded;
+		this.roomHandler = roomHandler;
+		this.roomHandler.onRoomsLoadedCallback = onRoomsLoaded;
 		
 		var text = new Text("Room List");
 		text.x = 400;

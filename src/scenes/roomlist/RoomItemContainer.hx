@@ -2,7 +2,7 @@ package scenes.roomlist;
 import milkshake.core.GameObject;
 import milkshake.core.Sprite;
 import milkshake.core.Text;
-import network.packets.room.Room;
+import net.packets.room.Room;
 import pixi.Graphics;
 import pixi.Rectangle;
 

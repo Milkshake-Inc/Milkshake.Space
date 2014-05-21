@@ -1,12 +1,13 @@
-package network.handlers;
+package net.handlers;
+
 import js.node.SocketIo.SocketNamespace;
 import milkshake.game.network.AbstractHandler;
 import milkshake.game.scene.SceneManager;
-import network.packets.Player;
-import network.packets.room.CreateRoom;
-import network.packets.room.JoinRoom;
-import network.packets.room.Room;
-import network.packets.room.RoomList;
+import net.packets.Player;
+import net.packets.room.CreateRoom;
+import net.packets.room.JoinRoom;
+import net.packets.room.Room;
+import net.packets.room.RoomList;
 import scenes.lobby.LobbyScene;
 
 /**

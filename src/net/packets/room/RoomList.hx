@@ -1,4 +1,4 @@
-package network.packets.room;
+package net.packets.room;
 
 /**
  * ...
