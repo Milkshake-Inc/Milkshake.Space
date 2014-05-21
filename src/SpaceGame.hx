@@ -56,6 +56,8 @@ class SpaceGame extends MilkshakeGame
 		sceneManager.addScene("game", new GameScene(core, sceneManager));
 		
 		sceneManager.changeScene("startMenu");
+		
+		//viewManager.addView("debug", new DebugViewController(null, null, null));
 	}
 
 

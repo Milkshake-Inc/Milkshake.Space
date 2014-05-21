@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" ng-app>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -15,21 +15,15 @@
 	<script src="js/socket.io.js"></script>
 </head>
 
-	<body>
-		
-
-
+	<body style="background-color:#2c3e50" >
 		<div class="container" ng-app="MilkSpace">
-			<a href="#fakelink" class="btn btn-block btn-lg btn-primary">Hello World</a>
-			<div ng-include=" 'views/hud.html' "></div>
-			
+			<div ng-include=" 'views/hud.html' "></div>			
 			<canvas id="gameCanvas"></canvas>
-
 		</div>
 
-
-
 		<script src="./game.js"></script>  
+		<script src="js/angular.js"></script>  
+		
 		<!-- Load JS here for greater good =============================-->
 	    <script src="js/jquery-1.8.3.min.js"></script>
 	    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
