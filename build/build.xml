@@ -1,0 +1,37 @@
+<project>
+
+	<property name="msbuid" value="C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe"/>
+
+	<target name="build-run-js" depends="js-build, js-run" />
+	<target name="build-run-mono" depends="mono-build, mono-run" />
+
+	<target name="js-build" >
+		<echo message="[JS] Build Started" />
+		<exec executable="cmd.exe" osfamily="windows" failonerror="true">
+			<arg line="/C haxe build_javascript.hxml" />
+		</exec>
+		<echo message="[JS] Build Complete" />
+	</target>
+	
+	<target name="js-run" >
+		<exec executable="cmd.exe" osfamily="windows" failonerror="true">
+			<arg line="/C start chrome js/index.html" />
+        </exec>
+	</target>
+
+	<target name="mono-build" >
+		<echo message="[Mono] Build Started" />
+		<exec executable="cmd.exe" osfamily="windows" failonerror="true">
+			<arg line="/C haxe build_mono.hxml" />
+		</exec>
+		<exec executable="cmd.exe" osfamily="windows" failonerror="true">
+			<arg line="/C ${msbuid} mono/Milk.csproj" />
+		</exec>
+		<echo message="[Mono] Build Complete" />
+	</target>
+	
+	<target name="mono-run" >
+		<exec executable="C:/Users/Lupas/Dropbox/Milk/mono/bin/x64/Debug/Milk.exe" osfamily="windows" failonerror="true" />
+	</target>
+
+</project>

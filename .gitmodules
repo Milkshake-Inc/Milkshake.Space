@@ -1,0 +1,6 @@
+[submodule "libs/Milkshake"]
+	path = libs/Milkshake
+	url = git@github.com:Milkshake-Inc/Milkshake.git
+[submodule "libs/Milkshake.Game"]
+	path = libs/Milkshake.Game
+	url = git@github.com:Milkshake-Inc/Milkshake.Game.git

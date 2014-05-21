@@ -1,0 +1,13 @@
+{
+  "name": "Milk-Space",
+  "version": "1.0.0",
+  "description": "Space Game built using Milkshake",
+  "main": "",
+  "author": "Andrew Munro & Lucas Jones",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-open": "~0.2.0",
+    "grunt-contrib-copy": "~0.5.0"
+  }
+}
