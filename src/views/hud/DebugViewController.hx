@@ -7,7 +7,7 @@ import milkshake.game.ui.view.AngularViewScope;
 interface DebugScope extends AngularViewScope
 {
 	var openView:String->Void;
-	var alert:Void->Void;
+	var testing:Void->Void;
 }
 
 @:expose
@@ -17,11 +17,9 @@ class DebugViewController extends AngularViewController<DebugScope>
 	{
 		super(scope, element, attrs);
 		
-		scope.alert = function():Void
+		scope.testing = function():Void
 		{
 			Browser.window.alert("Testing!");
 		}
 	}
-
-
 }

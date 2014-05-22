@@ -8,14 +8,16 @@ import scenes.game.GameScene;
 import scenes.lobby.LobbyScene;
 import scenes.roomlist.RoomListScene;
 import scenes.startmenu.StartMenuScene;
+import views.hud.DebugViewController;
 
 class SpaceGame extends MilkshakeGame
 {
-	 var roomHandler:RoomHandler;
+	var roomHandler:RoomHandler;
 	var gameHandler:GameHandler;
 	public var networkManager:MilkshakeNetworkManager;
 	
 	var game:SpaceGame;
+	var test:DebugViewController;
 	
 	static function main()
 	{
@@ -25,7 +27,7 @@ class SpaceGame extends MilkshakeGame
 	public function new()
 	{
 		super();
-		untyped window.world = game = this;
+		untyped window.game = game = this;
 		boot(Globals.SCREEN_HEIGHT, Globals.SCREEN_WIDTH);
 	}
 	
@@ -56,10 +58,7 @@ class SpaceGame extends MilkshakeGame
 		sceneManager.addScene("game", new GameScene(core, sceneManager));
 		
 		sceneManager.changeScene("startMenu");
-		
-		//viewManager.addView("debug", new DebugViewController(null, null, null));
 	}
-
 
 	override public function update(delta:Float):Void
 	{
