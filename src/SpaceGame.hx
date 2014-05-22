@@ -28,7 +28,7 @@ class SpaceGame extends MilkshakeGame
 	{
 		super();
 		untyped window.game = game = this;
-		boot(Globals.SCREEN_HEIGHT, Globals.SCREEN_WIDTH);
+		boot(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
 	}
 	
 	override public function boot(width:Float, height:Float):Void 
@@ -57,7 +57,7 @@ class SpaceGame extends MilkshakeGame
 		sceneManager.addScene("lobbyScene", new LobbyScene(core, roomHandler));
 		sceneManager.addScene("game", new GameScene(core, sceneManager));
 		
-		sceneManager.changeScene("startMenu");
+		sceneManager.changeScene("game");
 	}
 
 	override public function update(delta:Float):Void

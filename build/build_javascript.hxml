@@ -1,7 +1,6 @@
 -main SpaceGame
 -cp libs/Milkshake/libs
 -cp libs/Milkshake/src
--cp libs/Milkshake.Game/src
 -cp src
 -lib nape
 -lib nodejs
