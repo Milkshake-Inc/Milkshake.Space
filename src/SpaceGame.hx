@@ -17,7 +17,6 @@ class SpaceGame extends MilkshakeGame
 	public var networkManager:MilkshakeNetworkManager;
 	
 	var game:SpaceGame;
-	var test:DebugViewController;
 	
 	static function main()
 	{

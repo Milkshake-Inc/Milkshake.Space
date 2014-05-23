@@ -21,5 +21,8 @@ class DebugViewController extends AngularViewController<DebugScope>
 		{
 			Browser.window.alert("Testing!");
 		}
+		
+		//open on creation
+		open();
 	}
 }
