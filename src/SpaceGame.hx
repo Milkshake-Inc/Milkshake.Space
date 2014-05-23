@@ -27,12 +27,12 @@ class SpaceGame extends MilkshakeGame
 	{
 		super();
 		untyped window.game = game = this;
-		boot(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT);
+		boot(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT, 0x2c3e50);
 	}
 	
-	override public function boot(width:Float, height:Float):Void 
+	override public function boot(width:Float, height:Float, color:Int):Void 
 	{
-		super.boot(width, height);
+		super.boot(width, height, color);
 		
 		networkManager = new MilkshakeNetworkManager(sceneManager);
 		

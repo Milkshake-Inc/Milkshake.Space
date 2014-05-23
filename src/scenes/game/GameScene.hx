@@ -13,6 +13,6 @@ class GameScene extends Scene
 		super(core, "gameScene");
 		
 		
-		addNode(new TilingSprite("assets/pattern.png", Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT));
+		addNode(new TilingSprite("scenes/shared/pattern.png", Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT));
 	}
 }
