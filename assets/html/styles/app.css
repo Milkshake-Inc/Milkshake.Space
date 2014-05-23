@@ -12,7 +12,14 @@ body {
 }
 
 .view {
-	
+	position: absolute;
+}
+
+.ship_part {
+	margin: 10px !important;
+	border: white solid 2px;
+	width: 64px;
+	height: 64px;
 }
 
 #gameCanvas {

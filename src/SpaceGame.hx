@@ -7,6 +7,7 @@ import milkshake.io.net.MilkshakeNetworkManager;
 import scenes.game.GameScene;
 import scenes.lobby.LobbyScene;
 import scenes.roomlist.RoomListScene;
+import scenes.shipbuilder.ShipBuilderScene;
 import scenes.startmenu.StartMenuScene;
 import views.hud.DebugViewController;
 
@@ -55,8 +56,9 @@ class SpaceGame extends MilkshakeGame
 		sceneManager.addScene("roomListScene", new RoomListScene(core, roomHandler));
 		sceneManager.addScene("lobbyScene", new LobbyScene(core, roomHandler));
 		sceneManager.addScene("game", new GameScene(core, sceneManager));
+		sceneManager.addScene("shipbuilder", new ShipBuilderScene(core, sceneManager));
 		
-		sceneManager.changeScene("game");
+		sceneManager.changeScene("shipbuilder");
 	}
 
 	override public function update(delta:Float):Void
