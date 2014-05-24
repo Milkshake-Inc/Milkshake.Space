@@ -12,10 +12,20 @@ import views.shipbuilder.ShipBuilderViewController;
  */
 class ShipBuilderScene extends Scene
 {
-	public function new(core:IGameCore, sceneManager:SceneManager)
+	var view:ShipBuilderViewController;
+	var game:SpaceGame;
+	
+	public function new(game:SpaceGame)
 	{
-		super(core, "shipBuilderScene");
+		super(game.core, "shipBuilderScene");
+		this.game = game;
 		
 		addNode(new TilingSprite("scenes/shared/pattern.png", Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT));
+	}
+	
+	override function onLoaded():Void 
+	{
+		view = cast game.viewManager.getViewById("ship_builder");
+		trace(view);
 	}
 }

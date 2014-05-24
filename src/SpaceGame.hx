@@ -13,8 +13,8 @@ import views.hud.DebugViewController;
 
 class SpaceGame extends MilkshakeGame
 {
-	var roomHandler:RoomHandler;
-	var gameHandler:GameHandler;
+	public var roomHandler:RoomHandler;
+	public var gameHandler:GameHandler;
 	public var networkManager:MilkshakeNetworkManager;
 	
 	var game:SpaceGame;
@@ -52,13 +52,13 @@ class SpaceGame extends MilkshakeGame
 		roomHandler = new RoomHandler(networkManager.socket, sceneManager);
 		gameHandler = new GameHandler(networkManager.socket, sceneManager, roomHandler);
 		
-		sceneManager.addScene("startMenu", new StartMenuScene(core, sceneManager));
-		sceneManager.addScene("roomListScene", new RoomListScene(core, roomHandler));
-		sceneManager.addScene("lobbyScene", new LobbyScene(core, roomHandler));
-		sceneManager.addScene("game", new GameScene(core, sceneManager));
-		sceneManager.addScene("shipbuilder", new ShipBuilderScene(core, sceneManager));
+		sceneManager.addScene("startMenu", new StartMenuScene(this));
+		sceneManager.addScene("roomListScene", new RoomListScene(this));
+		sceneManager.addScene("lobbyScene", new LobbyScene(this));
+		sceneManager.addScene("game", new GameScene(this));
+		sceneManager.addScene("shipbuilder", new ShipBuilderScene(this));
 		
-		sceneManager.changeScene("shipbuilder");
+		sceneManager.changeScene("game");
 	}
 
 	override public function update(delta:Float):Void

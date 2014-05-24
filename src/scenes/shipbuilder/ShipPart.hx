@@ -13,4 +13,8 @@ class ShipPart extends Sprite
 		super(url, id);
 	}
 	
+	public function clone():ShipPart
+	{
+		return new ShipPart(url, id);
+	}
 }

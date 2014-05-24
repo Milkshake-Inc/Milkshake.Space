@@ -14,9 +14,9 @@ class LobbyScene extends Scene
 	private var lobbyText:Text;	
 	private var currentRoom:Room;
 
-	public function new(core:IGameCore, roomHanlder:RoomHandler) 
+	public function new(game:SpaceGame) 
 	{
-		super(core, "LobbyScene");
+		super(game.core, "LobbyScene");
 		
 		lobbyText = new Text("");
 		lobbyText.x = 300;
@@ -28,7 +28,7 @@ class LobbyScene extends Scene
 		quitRoomButton.y = 600;
 		quitRoomButton.displayObject.click = function(data:InteractionData):Void
 		{
-			roomHanlder.leaveRoom();
+			game.roomHandler.leaveRoom();
 		}
 		addNode(quitRoomButton);
 	}
