@@ -79,7 +79,7 @@ class PixiDebugRenderer extends Debug
 	
 	public function draw(space:Space)
 	{
-		/*
+		
 		graphics.clear();		
 	
 		for (body in space.bodies)
@@ -97,7 +97,7 @@ class PixiDebugRenderer extends Debug
 			
 			drawBody(body);
 		}
-		*/
+		
 	}
 	
 }
