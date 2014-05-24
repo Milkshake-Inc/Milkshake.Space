@@ -17,10 +17,10 @@ class RoomListScene extends Scene
 	
 	private var roomHandler:RoomHandler;
 
-	public function new(game:IGameCore, roomHandler:RoomHandler)
+	public function new(game:SpaceGame)
 	{
-		super(game, "RoomListScene");
-		this.roomHandler = roomHandler;
+		super(game.core, "RoomListScene");
+		this.roomHandler = game.roomHandler;
 		this.roomHandler.onRoomsLoadedCallback = onRoomsLoaded;
 		
 		var text = new Text("Room List");

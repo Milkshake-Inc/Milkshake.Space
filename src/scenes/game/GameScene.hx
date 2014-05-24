@@ -21,15 +21,17 @@ class GameScene extends Scene
 	public var physicsDebug:PixiDebug;
 
 	var rocket:Body;
-	var planets:Array<Body> = [];
+	var planets:Array<Body>;
 
 	var samplePoint:Body;
 
-	public function new(core:IGameCore, sceneManager:SceneManager)
+	public function new(game:SpaceGame)
 	{
-		super(core, "gameScene");
+		super(game.core, "gameScene");
 		
 		space = new Space();
+		
+		planets = [];
 
 		addNode(new TilingSprite("scenes/shared/pattern.png", Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT));
 		addNode(physicsDebug = new PixiDebug());
@@ -45,17 +47,17 @@ class GameScene extends Scene
 		samplePoint = new Body();
         samplePoint.shapes.add(new Circle(0.001));
 
-        game.input.addKeyDownHandler(KeyboardCode.D, function():Void
+        core.input.addKeyDownHandler(KeyboardCode.D, function():Void
 		{
 			rocket.applyAngularImpulse(0.5);	
 		});
 
-		game.input.addKeyDownHandler(KeyboardCode.A, function():Void
+		core.input.addKeyDownHandler(KeyboardCode.A, function():Void
 		{
 			rocket.applyAngularImpulse(-0.5);	
 		});
 		
-		game.input.addKeyDownHandler(KeyboardCode.W, function():Void
+		core.input.addKeyDownHandler(KeyboardCode.W, function():Void
 		{
 			rocket.applyImpulse(getVecFromAngle(rocket.rotation - 90).mul(0.5));	
 		});
