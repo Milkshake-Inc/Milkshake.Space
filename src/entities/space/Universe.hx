@@ -3,13 +3,13 @@ package entities.space;
 class Universe extends GameObject
 {
 	public var space(default, null):Space;
-	public var plannets(default, null):Array<Plannet>;
+	public var planets(default, null):Array<Planet>;
 
 	public function new(space:Space):Void
 	{
 		this.space = space;
 
-		plannets = [];
+		planets = [];
 	}
 
 	override public function addNode(node:Node):Void
@@ -26,6 +26,6 @@ class Universe extends GameObject
 
 	public function addPlanet(planet:Planet):Void
 	{
-		plannets.push(planet);
+		planets.push(planet);
 	}
 }
