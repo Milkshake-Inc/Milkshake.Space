@@ -1,5 +1,6 @@
 package scenes.game ;
 
+import entities.ship.Ship;
 import milkshake.core.Sprite;
 import milkshake.core.TilingSprite;
 import milkshake.game.MilkshakeGame;
@@ -21,6 +22,8 @@ class GameScene extends Scene
 	public var physicsDebug:PixiDebug;
 
 	var rocket:Body;
+	var ship:Ship;
+	
 	var planets:Array<Body>;
 
 	var samplePoint:Body;
@@ -38,7 +41,13 @@ class GameScene extends Scene
 
 		addPlanet(1100, 500, 1280 / 2);
 		
-		rocket = new Body(BodyType.DYNAMIC);
+		ship = new Ship(core, "player");
+		ship.position.x = (1280 / 2);
+		ship.position.y = 0;
+		ship.space = space;
+		addNode(ship);
+		
+/*		rocket = new Body(BodyType.DYNAMIC);
 		rocket.shapes.add(new Polygon(Polygon.box(20, 30)));
 		rocket.position.x = (1280 /2);
         rocket.position.y = 0;
@@ -60,7 +69,7 @@ class GameScene extends Scene
 		core.input.addKeyDownHandler(KeyboardCode.W, function():Void
 		{
 			rocket.applyImpulse(getVecFromAngle(rocket.rotation - 90).mul(0.5));	
-		});
+		});*/
 	}
 
 	override public function update(delta:Float):Void
@@ -74,7 +83,7 @@ class GameScene extends Scene
 		
 		physicsDebug.drawSpace(space);
 
-		for(a in 0 ... 100)
+/*		for(a in 0 ... 100)
 		{
 			var pos = getTrajectoryPoint(a * 10);
 			physicsDebug.pixiDebug.graphics.drawCircle(pos.x + rocket.position.x, pos.y + rocket.position.y, 10);
@@ -83,7 +92,7 @@ class GameScene extends Scene
 		x = -(rocket.position.x * scaleX) + (1024 / 2);
 		y = -(rocket.position.y * scaleY) + (720 / 2);		
 		scaleX = 0.5;
-		scaleY = 0.5;
+		scaleY = 0.5;*/
 		
 		super.update(delta);
 	}
