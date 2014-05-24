@@ -80,7 +80,17 @@ class Ship extends GameObject
 	
 	public function applyThrust(dir:ThrustDirection)
 	{
-		
+		switch(dir)
+		{
+			case ThrustDirection.NORTH:
+				coreModule.body.applyImpulse(new Vec2(0, -5));
+			case ThrustDirection.EAST:
+				coreModule.body.applyImpulse(new Vec2(5, 0));
+			case ThrustDirection.SOUTH:
+				coreModule.body.applyImpulse(new Vec2(0, 5));
+			case ThrustDirection.WEST:
+				coreModule.body.applyImpulse(new Vec2(-5, 0));
+		}
 	}
 	
 	public function set_space(value:Space):Space 

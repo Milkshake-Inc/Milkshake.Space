@@ -1,5 +1,6 @@
 package scenes.game ;
 
+import entities.ship.Ship;
 import entities.space.Planet;
 import entities.space.Universe;
 import milkshake.core.Sprite;
@@ -21,7 +22,7 @@ class GameScene extends Scene
 {
 	public var universe:Universe;
 
-	var rocket:Body;
+	var ship:Ship;
 
 	public function new(game:SpaceGame)
 	{
@@ -30,46 +31,18 @@ class GameScene extends Scene
 		addNode(new TilingSprite("scenes/shared/pattern.png", Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT));
 		
 		addNode(universe = new Universe());
-			
-
-
+		
 		universe.addNode(new Planet(200, 10, 1280 / 2, 720 / 2));
 
-		
-		/*
-		rocket = new Body(BodyType.DYNAMIC);
-		rocket.shapes.add(new Polygon(Polygon.box(20, 30)));
-		rocket.position.x = (1280 /2);
-        rocket.position.y = 0;
-		rocket.space = space;
-
-		
-
-        core.input.addKeyDownHandler(KeyboardCode.D, function():Void
-		{
-			rocket.applyAngularImpulse(0.5);	
-		});
-
-		core.input.addKeyDownHandler(KeyboardCode.A, function():Void
-		{
-			rocket.applyAngularImpulse(-0.5);	
-		});
-		
-		core.input.addKeyDownHandler(KeyboardCode.W, function():Void
-		{
-			rocket.applyImpulse(getVecFromAngle(rocket.rotation - 90).mul(0.5));	
-		});*/
+		ship = new Ship(core, "player");
+		ship.position.x = (1280 / 2);
+		ship.position.y = 0;
+		ship.space = universe.space;
+		addNode(ship);
 	}
 
 	override public function update(delta:Float):Void
 	{
-		/*
-		// Camera
-		x = -(rocket.position.x * scaleX) + (1024 / 2);
-		y = -(rocket.position.y * scaleY) + (720 / 2);		
-		scaleX = 0.5;
-		scaleY = 0.5;
-		*/
 		super.update(delta);
 	}
 
