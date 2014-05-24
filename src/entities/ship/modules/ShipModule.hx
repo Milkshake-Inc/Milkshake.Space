@@ -3,6 +3,7 @@ import milkshake.core.Sprite;
 import nape.constraint.WeldJoint;
 import nape.geom.Vec2;
 import nape.phys.Body;
+import nape.phys.BodyType;
 import nape.shape.Shape;
 using Lambda;
 
@@ -22,7 +23,8 @@ class ShipModule extends Sprite
 	{
 		super(url, type);
 		
-		body = new Body();
+		body = new Body(BodyType.DYNAMIC);
+		body.mass = 1;
 		body.shapes.add(shape);
 		
 		adjacentModules = new Map<ShipModule, WeldJoint>();
@@ -35,8 +37,9 @@ class ShipModule extends Sprite
 	
 	public function addAdjacentModule(module:ShipModule)
 	{
-		var weld = new WeldJoint(body, module.body, new Vec2(0,0), new Vec2(0,0), 0);
+		var weld = new WeldJoint(body, module.body, new Vec2(0,0), offset, 0);
 		weld.stiff = true;
+		weld.space = body.space;
 		adjacentModules.set(module, weld);
 		module.adjacentModules.set(this, weld);
 	}
@@ -55,10 +58,7 @@ class ShipModule extends Sprite
 		{
 			for (adjacentModule in adjacentModules)
 			{
-				if (!adjacentModules.has(adjacentModule))
-				{
-					addAdjacentModule(adjacentModule);
-				}
+				addAdjacentModule(adjacentModule);
 			}
 		}
 	}
@@ -70,21 +70,13 @@ class ShipModule extends Sprite
 			removeAdjacentModule(adjacentModule);
 		}
 	}
-		
-	override public function set_x(value:Float):Float 
-	{ 
-		return position.x = body.position.x = sprite.position.x = value; 
-	}
-	
-	override public function set_y(value:Float):Float 
-	{ 
-		return position.y = body.position.y = sprite.position.y = value; 
-	}
 	
 	override public function update(deltaTime:Float):Void 
 	{
 		x = body.position.x;
 		y = body.position.y;
+		
+		rotation = body.rotation;
 		
 		super.update(deltaTime);
 	}

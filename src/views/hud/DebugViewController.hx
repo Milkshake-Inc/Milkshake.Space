@@ -23,6 +23,6 @@ class DebugViewController extends AngularViewController<DebugScope>
 		}
 		
 		//open on creation
-		open();
+		//open();
 	}
 }

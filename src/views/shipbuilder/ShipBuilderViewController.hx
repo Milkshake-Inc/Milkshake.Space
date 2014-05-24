@@ -25,7 +25,7 @@ class ShipBuilderViewController extends AngularViewController<ShipBuilderScope>
 		scope.shipParts.push(part1);
 		
 		scope.apply();
-		open();
+		//open();
 	}
 	
 }

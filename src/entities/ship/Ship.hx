@@ -10,6 +10,7 @@ import milkshake.IGameCore;
 import milkshake.io.input.KeyboardCode;
 import nape.constraint.WeldJoint;
 import nape.geom.Vec2;
+import nape.phys.Body;
 import nape.space.Space;
 
 /**
@@ -32,7 +33,7 @@ class Ship extends GameObject
 		modules = [];
 		initInput();
 		
-		coreModule = new CoreModule(0, 0);
+		coreModule = new CoreModule();
 		var hullModule = new HullModule(0, 32);
 		
 		addModule(coreModule);
@@ -99,6 +100,10 @@ class Ship extends GameObject
 		for (module in modules)
 		{
 			module.body.space = space;
+			for (adjacentModule in module.adjacentModules.keys())
+			{
+				module.adjacentModules.get(adjacentModule).space = space;
+			}
 		}
 		
 		return space;

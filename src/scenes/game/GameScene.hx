@@ -32,7 +32,7 @@ class GameScene extends Scene
 		
 		addNode(universe = new Universe());
 		
-		universe.addNode(new Planet(200, 10, 1280 / 2, 720 / 2));
+		universe.addNode(new Planet(200, 2000, 1280 / 2, 720 / 2));
 
 		ship = new Ship(core, "player");
 		ship.position.x = (1280 / 2);
