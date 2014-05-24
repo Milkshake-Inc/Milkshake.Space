@@ -1,5 +1,7 @@
 
-package entities.space;
+package entities;
+
+import nape.phys.Body;
 
 interface IBodyObject
 {
