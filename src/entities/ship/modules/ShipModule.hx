@@ -24,6 +24,7 @@ class ShipModule extends Sprite
 		super(url, type);
 		
 		body = new Body(BodyType.DYNAMIC);
+		body.setShapeMaterials(new nape.phys.Material(0, 0, 0, 1, 0));
 		body.mass = 1;
 		body.shapes.add(shape);
 		
