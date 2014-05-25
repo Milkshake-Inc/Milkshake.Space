@@ -23,7 +23,7 @@ class ShipBuilderScene extends Scene
 		addNode(new TilingSprite("scenes/shared/pattern.png", Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT));
 	}
 	
-	override function onLoaded():Void 
+	function onLoaded():Void 
 	{
 		view = cast game.viewManager.getViewById("ship_builder");
 		trace(view);

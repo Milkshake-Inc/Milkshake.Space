@@ -13,13 +13,12 @@ import pixi.Rectangle;
 class RoomItemContainer extends GameObject
 {
 	public var selected(default, set):Bool;
-	
-	private var graphics:Graphics;
-	private var width:Float;
-	private var height:Float;
 	public var room:Room;
-	
 	public var playerText(default, null):Text;
+	
+	var graphics:Graphics;
+	var height:Float;
+	var width:Float;
 	
 	public function new(room:Room, width:Float, height:Float) 
 	{

@@ -11,8 +11,37 @@ body {
 	border: white solid 10px;
 }
 
+.ship_part {
+	margin: 10px !important;
+	border: white solid 2px;
+	width: 64px;
+	height: 64px;
+}
+
 .view {
-	
+	position: absolute;
+}
+
+#zoom {
+	top: 575px;
+	left: 1200px;
+
+	a {
+		width:60px;
+		height:60px
+	}
+}
+
+.zoom {
+	width:40px;
+	height:40px;
+	display:block;
+	background-image: url('../images/zoomicons.png');
+	margin-left: -5px;
+}
+
+.zoomIn {
+	background-position: 40px;
 }
 
 #gameCanvas {

@@ -16,6 +16,9 @@ class Planet extends GameObject implements IBodyObject
 	public function new(radius:Float, mass:Float, ?x:Float = 0, ?y:Float = 0)
 	{
 		super();
+		
+		this.x = x;
+		this.y = y;
 
 		body = new Body(BodyType.STATIC);
 		body.shapes.add(new Circle(radius));
