@@ -1,5 +1,8 @@
 package scenes.game ;
 
+import entities.ship.Direction;
+import entities.ship.modules.HullModule;
+import entities.ship.modules.WheelModule;
 import entities.ship.Ship;
 import entities.space.Planet;
 import entities.space.Universe;
@@ -28,19 +31,70 @@ class GameScene extends Scene
 	{
 		super(game.core, "gameScene");
 		
-		addNode(new TilingSprite("scenes/shared/pattern.png", Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT));
-		
+		addNode(new TilingSprite("scenes/game/background.jpg", 800000, 800000));
+
 		addNode(universe = new Universe());
+		
 		var planet;
 		universe.addNode(planet = new Planet(200, 2000, 1280 / 2, 720 / 2));
 
 		ship = new Ship(core, "player");
-		ship.position.x = (1280 / 2);
-		ship.position.y = 0;
-		ship.space = universe.space;
-		addNode(ship);
+		ship.x = (1280 / 2);
+		ship.y = 100;
+
+		universe.addNode(ship);
+
+		var frontWheel;
+		var backWheel;
+
+		ship.addModule(new HullModule(0, 32), [ ship ]);
+		ship.addModule(new HullModule(0, 64), [ ship ]);
+		ship.addModule(new HullModule(0, -32), [ ship ]);
+		ship.addModule(new HullModule(0, -64), [ ship ]);
+		//ship.addModule(frontWheel = new WheelModule(32, -64), [ ship ]);
+		//ship.addModule(backWheel = new WheelModule(32, 64), [ ship ]);
+		cameraManager.currentCamera.target = ship;
 		
-		cameraManager.currentCamera.target = planet;
+		initInput();
+	}
+
+	public function initInput()
+	{
+		core.input.addKeyDownHandler(KeyboardCode.W, function():Void
+		{
+			applyThrust(Direction.NORTH);
+		});
+		
+		core.input.addKeyDownHandler(KeyboardCode.D, function():Void
+		{
+			applyThrust(Direction.EAST);
+		});
+
+		core.input.addKeyDownHandler(KeyboardCode.S, function():Void
+		{
+			applyThrust(Direction.SOUTH);	
+		});
+		
+		core.input.addKeyDownHandler(KeyboardCode.A, function():Void
+		{
+			applyThrust(Direction.WEST);	
+		});
+	}
+
+
+	public function applyThrust(dir:Direction)
+	{
+		switch(dir)
+		{
+			case Direction.NORTH:
+				ship.body.applyImpulse(new Vec2(0, -5));
+			case Direction.EAST:
+				ship.body.applyImpulse(new Vec2(5, 0));
+			case Direction.SOUTH:
+				ship.body.applyImpulse(new Vec2(0, 5));
+			case Direction.WEST:
+				ship.body.applyImpulse(new Vec2(-5, 0));
+		}
 	}
 
 	override public function update(delta:Float):Void

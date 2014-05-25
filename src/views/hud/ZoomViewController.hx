@@ -24,12 +24,12 @@ class ZoomViewController extends AngularViewController<ZoomScope>
 		
 		scope.zoomIn = function():Void
 		{
-			camera.zoom += 0.2;
+			camera.zoom *= 1.2;
 		}
 		
 		scope.zoomOut = function():Void
 		{
-			camera.zoom -= 0.2;
+			camera.zoom *= 0.8;
 		}
 		
 		//open on creation

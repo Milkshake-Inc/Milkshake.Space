@@ -21,7 +21,7 @@ class ShipModule extends PhysicsGameObject
 		super();
 
 		var sprite = new Sprite(url);
-		sprite.alpha = 0.5;
+		//sprite.alpha = 0.5;
 		sprite.x = x;
 		sprite.y = y;
 
