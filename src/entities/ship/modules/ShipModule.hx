@@ -19,6 +19,7 @@ class ShipModule extends PhysicsGameObject
 	public function new(x:Float, y:Float, url:String, type:String, shape:Shape) 
 	{
 		super();
+
 		var sprite = new Sprite(url);
 		sprite.alpha = 0.5;
 		sprite.x = x;
@@ -71,6 +72,4 @@ class ShipModule extends PhysicsGameObject
 			removeConnectedModule(connectedModule);
 		}
 	}
-	
-	
 }

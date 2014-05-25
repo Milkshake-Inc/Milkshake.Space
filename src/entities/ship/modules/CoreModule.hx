@@ -1,11 +1,8 @@
 package entities.ship.modules;
+
 import nape.shape.Polygon;
 import nape.shape.Shape;
 
-/**
- * ...
- * @author Milkshake-Inc
- */
 class CoreModule extends ShipModule
 {
 	public function new()
@@ -14,7 +11,4 @@ class CoreModule extends ShipModule
 		
 		super(0, 0, "scenes/shipbuilder/parts/core.png", "core", shape);
 	}
-	
-	
-	
 }

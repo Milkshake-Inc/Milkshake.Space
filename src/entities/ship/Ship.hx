@@ -4,7 +4,6 @@ import entities.PhysicsGameObject;
 import entities.ship.modules.CoreModule;
 import entities.ship.modules.HullModule;
 import entities.ship.modules.ShipModule;
-import entities.ship.modules.ThrustDirection;
 import milkshake.core.GameObject;
 import milkshake.core.Node;
 import milkshake.core.Sprite;
@@ -28,32 +27,6 @@ class Ship extends CoreModule
 		this.core = core;
 
 		modules = [];
-		
-		initInput();
-	}
-	
-	public function initInput()
-	{
-		core.input.addKeyDownHandler(KeyboardCode.W, function():Void
-		{
-			applyThrust(ThrustDirection.NORTH);
-		});
-		
-		core.input.addKeyDownHandler(KeyboardCode.D, function():Void
-		{
-			
-			applyThrust(ThrustDirection.EAST);
-		});
-
-		core.input.addKeyDownHandler(KeyboardCode.S, function():Void
-		{
-			applyThrust(ThrustDirection.SOUTH);	
-		});
-		
-		core.input.addKeyDownHandler(KeyboardCode.A, function():Void
-		{
-			applyThrust(ThrustDirection.WEST);	
-		});
 	}
 	
 	public function addModule(module:ShipModule, adjacentModules:Array<ShipModule> = null)
@@ -72,20 +45,6 @@ class Ship extends CoreModule
 		module.onDisconnected();
 	}
 	
-	public function applyThrust(dir:ThrustDirection)
-	{
-		switch(dir)
-		{
-			case ThrustDirection.NORTH:
-				body.applyImpulse(new Vec2(0, -5));
-			case ThrustDirection.EAST:
-				body.applyImpulse(new Vec2(5, 0));
-			case ThrustDirection.SOUTH:
-				body.applyImpulse(new Vec2(0, 5));
-			case ThrustDirection.WEST:
-				body.applyImpulse(new Vec2(-5, 0));
-		}
-	}
 	/*
 	
 	override public function set_x(value:Float):Float 
