@@ -100,9 +100,9 @@ class Ship extends GameObject
 		for (module in modules)
 		{
 			module.body.space = space;
-			for (adjacentModule in module.adjacentModules.keys())
+			for (connectedModule in module.connectedModules.keys())
 			{
-				module.adjacentModules.get(adjacentModule).space = space;
+				module.connectedModules.get(connectedModule).space = space;
 			}
 		}
 		
