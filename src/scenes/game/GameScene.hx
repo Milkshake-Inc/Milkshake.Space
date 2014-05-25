@@ -31,7 +31,9 @@ class GameScene extends Scene
 	{
 		super(game.core, "gameScene");
 		
-		addNode(new TilingSprite("scenes/game/background.jpg", 800000, 800000));
+		var bg;
+		addNode(bg = new TilingSprite("scenes/game/background.jpg", 800000, 800000));
+		bg.ignoreCameraZoom = true;
 
 		addNode(universe = new Universe());
 		
