@@ -15,7 +15,7 @@ class ShipModule extends Sprite
 {
 	public var body:Body;
 	
-	public var adjacentModules:Map<ShipModule, WeldJoint>;
+	public var connectedModules:Map<ShipModule, WeldJoint>;
 	
 	public var offset:Vec2;
 	
@@ -28,7 +28,7 @@ class ShipModule extends Sprite
 		body.mass = 1;
 		body.shapes.add(shape);
 		
-		adjacentModules = new Map<ShipModule, WeldJoint>();
+		connectedModules = new Map<ShipModule, WeldJoint>();
 		
 		this.x = x;
 		this.y = y;
@@ -36,39 +36,39 @@ class ShipModule extends Sprite
 		offset = new Vec2(x, y);
 	}
 	
-	public function addAdjacentModule(module:ShipModule)
+	public function addConnectedModule(module:ShipModule)
 	{
 		var weld = new WeldJoint(body, module.body, new Vec2(0,0), offset, 0);
 		weld.stiff = true;
 		weld.space = body.space;
-		adjacentModules.set(module, weld);
-		module.adjacentModules.set(this, weld);
+		connectedModules.set(module, weld);
+		module.connectedModules.set(this, weld);
 	}
 	
-	public function removeAdjacentModule(module:ShipModule)
+	public function removeConnectedModule(module:ShipModule)
 	{
-		var weld = adjacentModules.get(module);
-		adjacentModules.remove(module);
-		module.adjacentModules.remove(this);
+		var weld = connectedModules.get(module);
+		connectedModules.remove(module);
+		module.connectedModules.remove(this);
 		body.space.constraints.remove(weld);
 	}
 	
-	public function onConnected(adjacentModules:Array<ShipModule>):Void 
+	public function onConnected(connectedModules:Array<ShipModule>):Void 
 	{
-		if (adjacentModules != null)
+		if (connectedModules != null)
 		{
-			for (adjacentModule in adjacentModules)
+			for (connectedModule in connectedModules)
 			{
-				addAdjacentModule(adjacentModule);
+				addConnectedModule(connectedModule);
 			}
 		}
 	}
 	
 	public function onDisconnected():Void 
 	{
-		for (adjacentModule in adjacentModules.keys())
+		for (connectedModule in connectedModules.keys())
 		{
-			removeAdjacentModule(adjacentModule);
+			removeConnectedModule(connectedModule);
 		}
 	}
 	
