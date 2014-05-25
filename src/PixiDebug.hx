@@ -49,7 +49,7 @@ class PixiDebugRenderer extends Debug
 		{
 			if (Std.is(shape, Polygon))
 			{
-				graphics.beginFill(0x99FF33, 1);					
+				graphics.beginFill(0x99FF33, 0.5);					
 				//graphics.lineStyle(3, 0x558F1D);
 				
 				var polygon:Polygon = cast shape;

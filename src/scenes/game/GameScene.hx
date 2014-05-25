@@ -1,5 +1,6 @@
 package scenes.game ;
 
+import entities.ship.modules.HullModule;
 import entities.ship.Ship;
 import entities.space.Planet;
 import entities.space.Universe;
@@ -28,17 +29,17 @@ class GameScene extends Scene
 	{
 		super(game.core, "gameScene");
 		
-		addNode(new TilingSprite("scenes/shared/pattern.png", Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT));
-		
 		addNode(universe = new Universe());
 		
 		universe.addNode(new Planet(200, 2000, 1280 / 2, 720 / 2));
 
 		ship = new Ship(core, "player");
-		ship.position.x = (1280 / 2);
-		ship.position.y = 0;
-		ship.space = universe.space;
-		addNode(ship);
+		ship.x = (1280 / 2);
+		ship.y = 100;
+
+		universe.addNode(ship);
+
+		ship.addModule(new HullModule(0, 32), [ ship ]);
 	}
 
 	override public function update(delta:Float):Void

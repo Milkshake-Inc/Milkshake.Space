@@ -1,37 +1,37 @@
 package entities.ship.modules;
+
+import entities.PhysicsGameObject;
 import milkshake.core.Sprite;
 import nape.constraint.WeldJoint;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.BodyType;
 import nape.shape.Shape;
+
 using Lambda;
 
-/**
- * ...
- * @author Milkshake-Inc
- */
-class ShipModule extends Sprite
+class ShipModule extends PhysicsGameObject
 {
-	public var body:Body;
-	
 	public var connectedModules:Map<ShipModule, WeldJoint>;
 	
 	public var offset:Vec2;
 	
 	public function new(x:Float, y:Float, url:String, type:String, shape:Shape) 
 	{
-		super(url, type);
-		
+		super();
+		var sprite = new Sprite(url);
+		sprite.alpha = 0.5;
+		sprite.x = x;
+		sprite.y = y;
+
+		addNode(sprite);
+
 		body = new Body(BodyType.DYNAMIC);
 		body.setShapeMaterials(new nape.phys.Material(0, 0, 0, 1, 0));
 		body.mass = 1;
 		body.shapes.add(shape);
-		
+
 		connectedModules = new Map<ShipModule, WeldJoint>();
-		
-		this.x = x;
-		this.y = y;
 		
 		offset = new Vec2(x, y);
 	}
@@ -72,14 +72,5 @@ class ShipModule extends Sprite
 		}
 	}
 	
-	override public function update(deltaTime:Float):Void 
-	{
-		x = body.position.x;
-		y = body.position.y;
-		
-		rotation = body.rotation;
-		
-		super.update(deltaTime);
-	}
 	
 }

@@ -15,4 +15,6 @@ class CoreModule extends ShipModule
 		super(0, 0, "scenes/shipbuilder/parts/core.png", "core", shape);
 	}
 	
+	
+	
 }

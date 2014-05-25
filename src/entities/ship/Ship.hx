@@ -1,10 +1,12 @@
 package entities.ship;
 
+import entities.PhysicsGameObject;
 import entities.ship.modules.CoreModule;
 import entities.ship.modules.HullModule;
 import entities.ship.modules.ShipModule;
 import entities.ship.modules.ThrustDirection;
 import milkshake.core.GameObject;
+import milkshake.core.Node;
 import milkshake.core.Sprite;
 import milkshake.IGameCore;
 import milkshake.io.input.KeyboardCode;
@@ -13,31 +15,21 @@ import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.space.Space;
 
-/**
- * ...
- * @author Milkshake-Inc
- */
-class Ship extends GameObject
-{
-	public var space(default, set):Space;
-	
-	var coreModule:CoreModule;
-	
-	var modules:Array<ShipModule>;
-	var core:IGameCore;
+class Ship extends CoreModule
+{	
+	public var modules(default, null):Array<ShipModule>;
+
+	private var core:IGameCore;
 	
 	public function new(core:IGameCore, id:String="ship") 
 	{
-		super(id);
+		super();
+
 		this.core = core;
+
 		modules = [];
+		
 		initInput();
-		
-		coreModule = new CoreModule();
-		var hullModule = new HullModule(0, 32);
-		
-		addModule(coreModule);
-		addModule(hullModule, [coreModule]);
 	}
 	
 	public function initInput()
@@ -66,16 +58,17 @@ class Ship extends GameObject
 	
 	public function addModule(module:ShipModule, adjacentModules:Array<ShipModule> = null)
 	{
-		module.body.space = space;
 		modules.push(module);
 		addNode(module);
+
 		module.onConnected(adjacentModules);
 	}
-	
+
 	public function removeModule(module:ShipModule)
 	{
 		modules.remove(module);
 		removeNode(module);
+
 		module.onDisconnected();
 	}
 	
@@ -84,55 +77,38 @@ class Ship extends GameObject
 		switch(dir)
 		{
 			case ThrustDirection.NORTH:
-				coreModule.body.applyImpulse(new Vec2(0, -5));
+				body.applyImpulse(new Vec2(0, -5));
 			case ThrustDirection.EAST:
-				coreModule.body.applyImpulse(new Vec2(5, 0));
+				body.applyImpulse(new Vec2(5, 0));
 			case ThrustDirection.SOUTH:
-				coreModule.body.applyImpulse(new Vec2(0, 5));
+				body.applyImpulse(new Vec2(0, 5));
 			case ThrustDirection.WEST:
-				coreModule.body.applyImpulse(new Vec2(-5, 0));
+				body.applyImpulse(new Vec2(-5, 0));
 		}
 	}
-	
-	public function set_space(value:Space):Space 
-	{ 
-		space = value;
-		for (module in modules)
-		{
-			module.body.space = space;
-			for (connectedModule in module.connectedModules.keys())
-			{
-				module.connectedModules.get(connectedModule).space = space;
-			}
-		}
-		
-		return space;
-	}
+	/*
 	
 	override public function set_x(value:Float):Float 
 	{ 
-		x = coreModule.x = value + coreModule.offset.x;
-		for (module in modules)
-		{
-			module.x = x + module.offset.x;
-		}
+		body.position.x = value;
+		x = value;
+
 		return x;
 	}
 	
 	override public function set_y(value:Float):Float 
 	{ 
-		y = coreModule.y = value + coreModule.offset.y;
-		for (module in modules)
-		{
-			module.y = y + module.offset.y;
-		}
+		body.position.y = value;
+		y = value;
+
 		return y;
-	}
-	
+	}*/
+
 	override public function update(deltaTime:Float):Void 
 	{
-		x = coreModule.x;
-		y = coreModule.y;
+		x = body.position.x;
+		y = body.position.y;		
+		rotation = body.rotation;
 		
 		super.update(deltaTime);
 	}
