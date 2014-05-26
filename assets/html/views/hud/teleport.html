@@ -1,0 +1,15 @@
+<div id="teleport" class="view" ng-show="isOpen" ng-controller="views.hud.TeleportViewController">
+	<div id="slider">
+		<div class="login-form">
+			<div class="form-group">
+				<input type="number" step="any" class="form-control login-field" value="" ng-model="x" placeholder="X:"/>
+			</div>
+
+			<div class="form-group">
+				<input type="number" step="any" class="form-control login-field" value="" ng-model="y" placeholder="Y:"/>
+			</div>
+
+			<a class="btn btn-primary btn-lg btn-block" ng-click="teleport()">Teleport</a>
+		</div>
+	</div>
+</div>

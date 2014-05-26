@@ -24,21 +24,26 @@ import nape.space.Space;
 class GameScene extends Scene
 {
 	public var universe:Universe;
+	
+	public var backgroundSize:Int;
 
-	var ship:Ship;
+	public var ship:Ship;
 
 	public function new(game:SpaceGame)
 	{
 		super(game.core, "gameScene");
 		
+		untyped backgroundSize = 9999999;
+		
 		var bg;
-		addNode(bg = new TilingSprite("scenes/game/background.jpg", 800000, 800000));
+		addNode(bg = new TilingSprite("scenes/game/stars.png", backgroundSize, backgroundSize));
+		bg.scale = new Vec2(0.8, 0.8);
 		bg.ignoreCameraZoom = true;
 
 		addNode(universe = new Universe());
 		
 		var planet;
-		universe.addNode(planet = new Planet(200, 2000, 1280 / 2, 720 / 2));
+		universe.addNode(planet = new Planet(1500, 800, 1280 / 2, 2000));
 
 		ship = new Ship(core, "player");
 		ship.x = (1280 / 2);
@@ -49,13 +54,65 @@ class GameScene extends Scene
 		var frontWheel;
 		var backWheel;
 
-		ship.addModule(new HullModule(0, 32), [ ship ]);
-		ship.addModule(new HullModule(0, 64), [ ship ]);
-		ship.addModule(new HullModule(0, -32), [ ship ]);
-		ship.addModule(new HullModule(0, -64), [ ship ]);
-		//ship.addModule(frontWheel = new WheelModule(32, -64), [ ship ]);
-		//ship.addModule(backWheel = new WheelModule(32, 64), [ ship ]);
+		//T
+		ship.addModule(new HullModule(-1, 0), [ ship ]);
+		ship.addModule(new HullModule(1, 0), [ ship ]);
+		ship.addModule(new HullModule(0, -1), [ ship ]);
+		ship.addModule(new HullModule(0, -1), [ ship ]);
+		
+		ship.addModule(new HullModule(-2, -1), [ ship ]);
+		ship.addModule(new HullModule(2, -1), [ ship ]);
+		
+		var penisLength = 15;
+		
+		for (i in 2...penisLength)
+		{
+			
+			ship.addModule(new HullModule(-3, -i), [ ship ]);
+		}
+		
+		for (i in 2...penisLength)
+		{
+			
+			ship.addModule(new HullModule(3, -i), [ ship ]);
+		}
+		
+		ship.addModule(new HullModule(-4, -penisLength), [ ship ]);
+		ship.addModule(new HullModule(-5, -penisLength), [ ship ]);
+		ship.addModule(new HullModule(4, -penisLength), [ ship ]);
+		ship.addModule(new HullModule(5, -penisLength), [ ship ]);
+		
+		ship.addModule(new HullModule(-6, -penisLength -1), [ ship ]);
+		ship.addModule(new HullModule(-6, -penisLength -2), [ ship ]);
+		ship.addModule(new HullModule( -6, -penisLength -3), [ ship ]);
+		
+		ship.addModule(new HullModule(6, -penisLength -1), [ ship ]);
+		ship.addModule(new HullModule(6, -penisLength -2), [ ship ]);
+		ship.addModule(new HullModule(6, -penisLength -3), [ ship ]);
+		
+		ship.addModule(new HullModule(-5, -penisLength -4), [ ship ]);
+		ship.addModule(new HullModule(-4, -penisLength -4), [ ship ]);
+		ship.addModule(new HullModule(-3, -penisLength -4), [ ship ]);
+		
+		ship.addModule(new HullModule(5, -penisLength -4), [ ship ]);
+		ship.addModule(new HullModule(4, -penisLength -4), [ ship ]);
+		ship.addModule(new HullModule(3, -penisLength -4), [ ship ]);
+		
+		ship.addModule(new HullModule(-2, -penisLength -3), [ ship ]);
+		ship.addModule(new HullModule(2, -penisLength -3), [ ship ]);
+		
+		ship.addModule(new HullModule(-1, -penisLength -2), [ ship ]);
+		ship.addModule(new HullModule(0, -penisLength -2), [ ship ]);
+		ship.addModule(new HullModule(1, -penisLength -2), [ ship ]);
+		
 		cameraManager.currentCamera.target = ship;
+		cameraManager.currentCamera.zoom = 0.5;
+		
+		var bg2;
+		addNode(bg2 = new TilingSprite("scenes/game/nebula.png", backgroundSize, backgroundSize));
+		bg2.scale = new Vec2(2, 2);
+		bg2.alpha = 0.3;
+		bg2.ignoreCameraZoom = true;
 		
 		initInput();
 	}

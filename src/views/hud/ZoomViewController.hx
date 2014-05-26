@@ -8,7 +8,6 @@ import milkshake.game.ui.view.AngularViewScope;
 
 interface ZoomScope extends AngularViewScope
 {
-	var openView:String->Void;
 	var zoomIn:Void->Void;
 	var zoomOut:Void->Void;
 }

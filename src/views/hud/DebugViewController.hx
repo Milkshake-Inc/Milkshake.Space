@@ -6,7 +6,6 @@ import milkshake.game.ui.view.AngularViewScope;
 
 interface DebugScope extends AngularViewScope
 {
-	var openView:String->Void;
 	var testing:Void->Void;
 }
 

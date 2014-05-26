@@ -12,7 +12,7 @@ class HullModule extends ShipModule
 	{
 		var shape:Shape = new Polygon(Polygon.box(32, 32));
 		
-		super(x, y, "scenes/shipbuilder/parts/hull.png", "hull", shape);
+		super(x * 32, y * 32, "scenes/shipbuilder/parts/hull.png", "hull", shape);
 	}
 	
 }

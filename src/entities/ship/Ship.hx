@@ -43,30 +43,46 @@ class Ship extends CoreModule
 		removeNode(module);
 
 		module.onDisconnected();
+	}	
+	
+	override public function get_x():Float 
+	{
+		return body.position.x;
 	}
 	
-	/*
+	override public function get_y():Float 
+	{
+		return body.position.y;
+	}
 	
 	override public function set_x(value:Float):Float 
 	{ 
 		body.position.x = value;
-		x = value;
-
-		return x;
+		
+		for (module in modules)
+		{
+			module.body.position.x = value;
+		}
+		
+		return value;
 	}
 	
 	override public function set_y(value:Float):Float 
 	{ 
 		body.position.y = value;
-		y = value;
-
-		return y;
-	}*/
+		
+		for (module in modules)
+		{
+			module.body.position.y = value;
+		}
+		
+		return value;
+	}
 
 	override public function update(deltaTime:Float):Void 
 	{
-		x = body.position.x;
-		y = body.position.y;		
+		super.x = body.position.x;
+		super.y = body.position.y;		
 		rotation = body.rotation;
 		
 		super.update(deltaTime);

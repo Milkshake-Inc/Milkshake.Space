@@ -10,6 +10,8 @@ import scenes.roomlist.RoomListScene;
 import scenes.shipbuilder.ShipBuilderScene;
 import scenes.startmenu.StartMenuScene;
 import views.hud.DebugViewController;
+import views.hud.ZoomViewController;
+import views.hud.TeleportViewController;
 
 class SpaceGame extends MilkshakeGame
 {

@@ -39,8 +39,9 @@ class ShipModule extends PhysicsGameObject
 	
 	public function addConnectedModule(module:ShipModule)
 	{
-		var weld = new WeldJoint(body, module.body, new Vec2(0,0), offset, 0);
+		var weld = new WeldJoint(body, module.body, new Vec2(), offset, 0);
 		weld.stiff = true;
+		weld.active = false;
 		weld.space = body.space;
 		connectedModules.set(module, weld);
 		module.connectedModules.set(this, weld);
