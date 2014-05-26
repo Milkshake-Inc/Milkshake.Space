@@ -21,7 +21,7 @@ class WheelModule extends ShipModule
 
 		//var shape = new nape.shape.Circle(32 / 2);
 		
-		super(x, y, "scenes/shipbuilder/parts/hull.png", "hull", shape);
+		super(x, y, "scenes/shipbuilder/parts/hull.png", "hull", shape, "wheel-module");
 
 		frontWheel = new Body(BodyType.DYNAMIC);
 		frontWheel.position.x = 10;

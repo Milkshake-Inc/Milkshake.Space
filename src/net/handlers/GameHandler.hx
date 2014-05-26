@@ -1,5 +1,6 @@
 package net.handlers;
 
+import js.html.Point;
 import js.node.SocketIo.SocketNamespace;
 import milkshake.game.network.AbstractHandler;
 import milkshake.game.scene.SceneManager;
@@ -39,11 +40,16 @@ class GameHandler extends AbstractHandler
 			{
 				if (player.id != socketID)
 				{
-					//gameScene.updateRemotePlayer(player);
+					gameScene.updateRemotePlayer(player);
 				}
 			}
 			
-			//socket.emit("updatePosition", { x: gameScene.tractor.x,  y: gameScene.tractor.y });
+			socket.emit("updatePosition", 
+			{
+				position: { x: gameScene.ship.x, y: gameScene.ship.y },
+				velocity: { x: gameScene.ship.body.velocity.x, y: gameScene.ship.body.velocity.y },
+				rotation: gameScene.ship.rotation
+			});
 		});
 		
 		socket.on("endGame", function(data:Dynamic):Void

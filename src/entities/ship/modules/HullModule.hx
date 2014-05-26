@@ -1,4 +1,5 @@
 package entities.ship.modules;
+import nape.phys.BodyType;
 import nape.shape.Polygon;
 import nape.shape.Shape;
 
@@ -12,7 +13,7 @@ class HullModule extends ShipModule
 	{
 		var shape:Shape = new Polygon(Polygon.box(32, 32));
 		
-		super(x * 32, y * 32, "scenes/shipbuilder/parts/hull.png", "hull", shape);
+		super(x * 32, y * 32, "scenes/shipbuilder/parts/hull.png", "hull", shape, "hull-module");
 	}
 	
 }

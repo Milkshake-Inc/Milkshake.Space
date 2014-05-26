@@ -1,6 +1,8 @@
 package entities.ship.modules;
 
 import entities.PhysicsGameObject;
+import entities.ship.modules.Anchor;
+import haxe.exception.Exception;
 import milkshake.core.Sprite;
 import nape.constraint.WeldJoint;
 import nape.geom.Vec2;
@@ -11,66 +13,80 @@ import nape.shape.Shape;
 using Lambda;
 
 class ShipModule extends PhysicsGameObject
-{
-	public var connectedModules:Map<ShipModule, WeldJoint>;
+{	
+	public var anchors(default, null):Array<Anchor>;
+	var sprite:Sprite;
 	
-	public var offset:Vec2;
-	
-	public function new(x:Float, y:Float, url:String, type:String, shape:Shape) 
+	public function new(x:Float, y:Float, url:String, type:String, shape:Shape, id:String = "ship-module") 
 	{
-		super();
+		super(id);
+		
+		anchors = [];
 
-		var sprite = new Sprite(url);
-		//sprite.alpha = 0.5;
-		sprite.x = x;
-		sprite.y = y;
-
+		sprite = new Sprite(url);
+		sprite.alpha = 0.5;
 		addNode(sprite);
 
 		body = new Body(BodyType.DYNAMIC);
 		body.setShapeMaterials(new nape.phys.Material(0, 0, 0, 1, 0));
 		body.mass = 1;
-		body.shapes.add(shape);
-
-		connectedModules = new Map<ShipModule, WeldJoint>();
+		body.shapes.add(shape); 
+	}
+	
+	private function initAnchors():Void
+	{
+		for (anchor in anchors) 
+		{
+			//offset position because anchors are added from the center
+			anchor.x -= body.bounds.width / 2;
+			anchor.y -= body.bounds.height / 2;
+			addNode(anchor);
+		}
+	}
+	
+	public function connect(anchor1:Anchor, anchor2:Anchor) 
+	{
+		anchor1.connectTo(anchor2);
+	}
+	
+	public function disconnect():Void
+	{
+		if (parent == null) return; //Not added to anything
 		
-		offset = new Vec2(x, y);
-	}
-	
-	public function addConnectedModule(module:ShipModule)
-	{
-		var weld = new WeldJoint(body, module.body, new Vec2(), offset, 0);
-		weld.stiff = true;
-		weld.active = false;
-		weld.space = body.space;
-		connectedModules.set(module, weld);
-		module.connectedModules.set(this, weld);
-	}
-	
-	public function removeConnectedModule(module:ShipModule)
-	{
-		var weld = connectedModules.get(module);
-		connectedModules.remove(module);
-		module.connectedModules.remove(this);
-		body.space.constraints.remove(weld);
-	}
-	
-	public function onConnected(connectedModules:Array<ShipModule>):Void 
-	{
-		if (connectedModules != null)
+		parent.removeNode(this);
+		
+		for (anchor in anchors) 
 		{
-			for (connectedModule in connectedModules)
-			{
-				addConnectedModule(connectedModule);
-			}
+			anchor.disconnect();
 		}
 	}
 	
-	public function onDisconnected():Void 
+	override public function get_x():Float 
 	{
-		for (connectedModule in connectedModules.keys())
-		{
-			removeConnectedModule(connectedModule);
-		}
+		return body.position.x;
+	}
+	
+	override public function get_y():Float 
+	{
+		return body.position.y;
+	}
+	
+	override public function set_x(value:Float):Float 
+	{ 
+		return body.position.x = value;
+	}
+	
+	override public function set_y(value:Float):Float 
+	{ 
+		return body.position.y = value;
+	}
+	
+	override public function update(deltaTime:Float):Void 
+	{
+		super.x = body.position.x;
+		super.y = body.position.y;
+		rotation = body.rotation;
+		
+		super.update(deltaTime);
 	}
 }

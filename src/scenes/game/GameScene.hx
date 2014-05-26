@@ -1,6 +1,7 @@
 package scenes.game ;
 
 import entities.ship.Direction;
+import entities.ship.modules.CoreModule;
 import entities.ship.modules.HullModule;
 import entities.ship.modules.WheelModule;
 import entities.ship.Ship;
@@ -20,12 +21,14 @@ import nape.phys.BodyType;
 import nape.shape.Circle;
 import nape.shape.Polygon;
 import nape.space.Space;
+import net.packets.Player;
 
 class GameScene extends Scene
 {
 	public var universe:Universe;
+	public var planet:Planet;
 	
-	public var backgroundSize:Int;
+	public var remoteShips:Map<String, Ship>;
 
 	public var ship:Ship;
 
@@ -33,7 +36,8 @@ class GameScene extends Scene
 	{
 		super(game.core, "gameScene");
 		
-		untyped backgroundSize = 9999999;
+		remoteShips = new Map<String, Ship>();
+		var backgroundSize = 9999999;
 		
 		var bg;
 		addNode(bg = new TilingSprite("scenes/game/stars.png", backgroundSize, backgroundSize));
@@ -42,68 +46,18 @@ class GameScene extends Scene
 
 		addNode(universe = new Universe());
 		
-		var planet;
 		universe.addNode(planet = new Planet(1500, 800, 1280 / 2, 2000));
 
-		ship = new Ship(core, "player");
-		ship.x = (1280 / 2);
-		ship.y = 100;
-
+		ship = new Ship("player");
+		
 		universe.addNode(ship);
-
-		var frontWheel;
-		var backWheel;
-
-		//T
-		ship.addModule(new HullModule(-1, 0), [ ship ]);
-		ship.addModule(new HullModule(1, 0), [ ship ]);
-		ship.addModule(new HullModule(0, -1), [ ship ]);
-		ship.addModule(new HullModule(0, -1), [ ship ]);
+		ship.x = 100;
+		ship.y = 100;
 		
-		ship.addModule(new HullModule(-2, -1), [ ship ]);
-		ship.addModule(new HullModule(2, -1), [ ship ]);
-		
-		var penisLength = 15;
-		
-		for (i in 2...penisLength)
-		{
-			
-			ship.addModule(new HullModule(-3, -i), [ ship ]);
-		}
-		
-		for (i in 2...penisLength)
-		{
-			
-			ship.addModule(new HullModule(3, -i), [ ship ]);
-		}
-		
-		ship.addModule(new HullModule(-4, -penisLength), [ ship ]);
-		ship.addModule(new HullModule(-5, -penisLength), [ ship ]);
-		ship.addModule(new HullModule(4, -penisLength), [ ship ]);
-		ship.addModule(new HullModule(5, -penisLength), [ ship ]);
-		
-		ship.addModule(new HullModule(-6, -penisLength -1), [ ship ]);
-		ship.addModule(new HullModule(-6, -penisLength -2), [ ship ]);
-		ship.addModule(new HullModule( -6, -penisLength -3), [ ship ]);
-		
-		ship.addModule(new HullModule(6, -penisLength -1), [ ship ]);
-		ship.addModule(new HullModule(6, -penisLength -2), [ ship ]);
-		ship.addModule(new HullModule(6, -penisLength -3), [ ship ]);
-		
-		ship.addModule(new HullModule(-5, -penisLength -4), [ ship ]);
-		ship.addModule(new HullModule(-4, -penisLength -4), [ ship ]);
-		ship.addModule(new HullModule(-3, -penisLength -4), [ ship ]);
-		
-		ship.addModule(new HullModule(5, -penisLength -4), [ ship ]);
-		ship.addModule(new HullModule(4, -penisLength -4), [ ship ]);
-		ship.addModule(new HullModule(3, -penisLength -4), [ ship ]);
-		
-		ship.addModule(new HullModule(-2, -penisLength -3), [ ship ]);
-		ship.addModule(new HullModule(2, -penisLength -3), [ ship ]);
-		
-		ship.addModule(new HullModule(-1, -penisLength -2), [ ship ]);
-		ship.addModule(new HullModule(0, -penisLength -2), [ ship ]);
-		ship.addModule(new HullModule(1, -penisLength -2), [ ship ]);
+		var topShipAnchor = ship.anchors[0];
+		var newCore = new CoreModule("core2");
+		var bottomNewCoreAnchor = newCore.anchors[1];
+		ship.addShipModule(newCore, topShipAnchor, bottomNewCoreAnchor);
 		
 		cameraManager.currentCamera.target = ship;
 		cameraManager.currentCamera.zoom = 0.5;
@@ -140,7 +94,6 @@ class GameScene extends Scene
 		});
 	}
 
-
 	public function applyThrust(dir:Direction)
 	{
 		switch(dir)
@@ -154,6 +107,24 @@ class GameScene extends Scene
 			case Direction.WEST:
 				ship.body.applyImpulse(new Vec2(-5, 0));
 		}
+	}
+	
+	public function updateRemotePlayer(data:Player) 
+	{
+/*		var remoteShip:Ship = remoteShips.get(data.id);
+		
+		if (remoteShip == null)
+		{
+			remoteShip = new Ship("remoteShip");			
+			remoteShips.set(data.id, remoteShip);
+			universe.addNode(remoteShip);
+		}
+		
+		remoteShip.x = data.position.x;
+		remoteShip.y = data.position.y;
+		remoteShip.rotation = data.rotation;
+		//remoteShip.body.velocity.x = data.velocity.x;
+		//remoteShip.body.velocity.y = data.velocity.y;*/
 	}
 
 	override public function update(delta:Float):Void
