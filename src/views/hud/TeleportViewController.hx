@@ -11,8 +11,10 @@ import scenes.game.GameScene;
 interface TeleportScope extends AngularViewScope
 {
 	var teleport:Void->Void;
-	var x:Float;
-	var y:Float;
+	var inputX:Float;
+	var inputY:Float;
+	var currentX:Int;
+	var currentY:Int;
 }
 
 @:expose
@@ -26,16 +28,30 @@ class TeleportViewController extends AngularViewController<TeleportScope>
 		
 		scope.teleport = function():Void
 		{
-			if (scope.x != null && scope.y != null)
+			if (scope.inputX != null && scope.inputY != null)
 			{
-				ship.x = scope.x;
-				ship.y = scope.y;
+				ship.x = scope.inputX;
+				ship.y = scope.inputY;
 				ship.stopVelocity();
 			}
 		}
 		
 		//open on creation
 		open();
+	}
+	
+	override public function update(deltaTime:Float):Void 
+	{
+		if (ship == null) return;
+		
+		if (scope.currentX != ship.x || scope.currentY != ship.y)
+		{
+			scope.currentX = Math.round(ship.x);
+			scope.currentY = Math.round(ship.y);
+			scope.apply();
+		}
+		
+		super.update(deltaTime);
 	}
 	
 	function get_ship():Ship

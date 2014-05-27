@@ -92,6 +92,16 @@ class ShipModule extends PhysicsGameObject
 		return body.position.y = value;
 	}
 	
+	override public function get_rotation():Float 
+	{
+		return body.rotation;
+	}
+	
+	override public function set_rotation(value:Float):Float 
+	{ 
+		return body.rotation = value;
+	}
+	
 	override public function update(deltaTime:Float):Void 
 	{
 		super.x = body.position.x;

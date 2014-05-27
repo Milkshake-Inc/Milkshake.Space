@@ -104,20 +104,26 @@ class GameScene extends Scene
 	
 	public function updateRemotePlayer(data:Player) 
 	{
-/*		var remoteShip:Ship = remoteShips.get(data.id);
+		var remoteShip:Ship = remoteShips.get(data.id);
 		
 		if (remoteShip == null)
 		{
-			remoteShip = new Ship("remoteShip");			
-			remoteShips.set(data.id, remoteShip);
+			remoteShip = new Ship("remoteShip");
 			universe.addNode(remoteShip);
+			
+			var topShipAnchor = remoteShip.anchors[0];
+			var newCore = new CoreModule("core-remote-2");
+			var bottomNewCoreAnchor = newCore.anchors[1];
+			remoteShip.addShipModule(newCore, topShipAnchor, bottomNewCoreAnchor);
+		
+			remoteShips.set(data.id, remoteShip);
 		}
 		
 		remoteShip.x = data.position.x;
 		remoteShip.y = data.position.y;
 		remoteShip.rotation = data.rotation;
 		//remoteShip.body.velocity.x = data.velocity.x;
-		//remoteShip.body.velocity.y = data.velocity.y;*/
+		//remoteShip.body.velocity.y = data.velocity.y;
 	}
 
 	public function getVecFromAngle(angle):Vec2
