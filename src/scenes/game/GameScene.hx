@@ -1,32 +1,23 @@
-package scenes.game ;
+package scenes.game;
 
 import entities.ship.Direction;
 import entities.ship.modules.CoreModule;
-import entities.ship.modules.HullModule;
-import entities.ship.modules.WheelModule;
 import entities.ship.Ship;
 import entities.space.Planet;
 import entities.space.Universe;
-import milkshake.core.Sprite;
 import milkshake.core.TilingSprite;
-import milkshake.game.MilkshakeGame;
+import milkshake.game.camera.FollowCamera;
 import milkshake.game.scene.Scene;
-import milkshake.game.scene.SceneManager;
-import milkshake.IGameCore;
 import milkshake.io.input.KeyboardCode;
-import nape.geom.Geom;
 import nape.geom.Vec2;
-import nape.phys.Body;
-import nape.phys.BodyType;
-import nape.shape.Circle;
-import nape.shape.Polygon;
-import nape.space.Space;
 import net.packets.Player;
 
 class GameScene extends Scene
 {
 	public var universe:Universe;
 	public var planet:Planet;
+	
+	public var camera(default, null):FollowCamera;
 	
 	public var remoteShips:Map<String, Ship>;
 
@@ -46,21 +37,23 @@ class GameScene extends Scene
 
 		addNode(universe = new Universe());
 		
-		universe.addNode(planet = new Planet(1500, 800, 1280 / 2, 2000));
+		universe.addNode(planet = new Planet(100, 2500, 1280 / 2, 2000));
 
 		ship = new Ship("player");
 		
 		universe.addNode(ship);
 		ship.x = 100;
 		ship.y = 100;
-		
+		/*
 		var topShipAnchor = ship.anchors[0];
 		var newCore = new CoreModule("core2");
 		var bottomNewCoreAnchor = newCore.anchors[1];
 		ship.addShipModule(newCore, topShipAnchor, bottomNewCoreAnchor);
+		*/
 		
-		cameraManager.currentCamera.target = ship;
-		cameraManager.currentCamera.zoom = 0.5;
+		camera = cast cameraManager.addCamera("followCamera", new FollowCamera(ship));
+		cameraManager.changeCamera("followCamera");
+		camera.zoom = 0.5;
 		
 		var bg2;
 		addNode(bg2 = new TilingSprite("scenes/game/nebula.png", backgroundSize, backgroundSize));
@@ -125,11 +118,6 @@ class GameScene extends Scene
 		remoteShip.rotation = data.rotation;
 		//remoteShip.body.velocity.x = data.velocity.x;
 		//remoteShip.body.velocity.y = data.velocity.y;*/
-	}
-
-	override public function update(delta:Float):Void
-	{
-		super.update(delta);
 	}
 
 	public function getVecFromAngle(angle):Vec2
