@@ -6,7 +6,7 @@ package ;
  */
 class Globals
 {
-	public static var SERVER_ADDRESS(default, never):String = "127.0.0.1:3000";
+	public static var SERVER_ADDRESS(default, never):String = "nomtrees.com:3000";
 	
 	//Dimensions
 	public static var SCREEN_WIDTH(default, never):Int = 1280;
