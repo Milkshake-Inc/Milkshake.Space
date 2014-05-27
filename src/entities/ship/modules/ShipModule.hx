@@ -61,6 +61,17 @@ class ShipModule extends PhysicsGameObject
 		}
 	}
 	
+	public function distanceFromModule(shipModule:ShipModule):Vec2
+	{
+		return new Vec2(body.position.x - shipModule.body.position.x, body.position.y - shipModule.body.position.y); 
+	}
+	
+	public function stopVelocity():Void
+	{
+		body.angularVel = 0;
+		body.velocity = new Vec2();
+	}
+	
 	override public function get_x():Float 
 	{
 		return body.position.x;

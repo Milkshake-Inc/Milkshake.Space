@@ -30,9 +30,31 @@ class Ship extends CoreModule
 	public function addShipModule(shipModule:ShipModule, shipAnchor:Anchor, shipModuleAnchor:Anchor)
 	{
 		shipModules.push(shipModule);
-		addNode(shipModule);
+		
+		//TODO should the shipmodule be a child of ship or universe?
+		parent.addNode(shipModule);
 		
 		shipModule.connect(shipAnchor, shipModuleAnchor);
+	}
+	
+	override public function stopVelocity():Void
+	{
+		for (shipModule in shipModules) shipModule.stopVelocity();
+		super.stopVelocity();
+	}
+	
+	override public function set_x(value:Float):Float 
+	{
+		for (shipModule in shipModules) shipModule.x = value + shipModule.distanceFromModule(this).x;
+		
+		return super.set_x(value);
+	}
+	
+	override public function set_y(value:Float):Float 
+	{ 
+		for (shipModule in shipModules) shipModule.y = value + shipModule.distanceFromModule(this).y;
+		
+		return super.set_y(value);
 	}
 	
 }

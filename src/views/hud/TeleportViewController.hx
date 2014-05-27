@@ -30,6 +30,7 @@ class TeleportViewController extends AngularViewController<TeleportScope>
 			{
 				ship.x = scope.x;
 				ship.y = scope.y;
+				ship.stopVelocity();
 			}
 		}
 		
