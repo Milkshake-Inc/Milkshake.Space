@@ -25,14 +25,18 @@ class Ship extends CoreModule
 	{
 		super(id);
 		shipModules = [];
+		
+		onAddedToNode.bind(function(node:Node):Void
+		{
+			for (shipModule in shipModules) node.addNode(shipModule);
+		});
 	}
 	
 	public function addShipModule(shipModule:ShipModule, shipAnchor:Anchor, shipModuleAnchor:Anchor)
 	{
 		shipModules.push(shipModule);
 		
-		//TODO should the shipmodule be a child of ship or universe?
-		parent.addNode(shipModule);
+		if(parent != null) parent.addNode(shipModule);
 		
 		shipModule.connect(shipAnchor, shipModuleAnchor);
 	}

@@ -41,14 +41,14 @@ class GameScene extends Scene
 
 		ship = new Ship("player");
 		
-		universe.addNode(ship);
-		ship.x = 100;
-		ship.y = 100;
-		
 		var topShipAnchor = ship.anchors[0];
 		var newCore = new CoreModule("core2");
 		var bottomNewCoreAnchor = newCore.anchors[1];
 		ship.addShipModule(newCore, topShipAnchor, bottomNewCoreAnchor);
+		
+		universe.addNode(ship);
+		ship.x = 100;
+		ship.y = 100;
 		
 		
 		camera = cast cameraManager.addCamera("followCamera", new FollowCamera(ship));

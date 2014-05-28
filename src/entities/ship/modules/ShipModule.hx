@@ -31,6 +31,14 @@ class ShipModule extends PhysicsGameObject
 		body.setShapeMaterials(new nape.phys.Material(0, 0, 0, 1, 0));
 		body.mass = 1;
 		body.shapes.add(shape); 
+		
+		onAddedToNode.bindVoid(function():Void
+		{
+			for (anchor in anchors)
+			{
+				if (anchor.weld != null) anchor.weld.space = this.body.space;
+			};
+		});
 	}
 	
 	private function initAnchors():Void
@@ -106,7 +114,7 @@ class ShipModule extends PhysicsGameObject
 	{
 		super.x = body.position.x;
 		super.y = body.position.y;
-		rotation = body.rotation;
+		super.rotation = body.rotation;
 		
 		super.update(deltaTime);
 	}

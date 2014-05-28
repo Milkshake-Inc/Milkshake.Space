@@ -56,7 +56,7 @@ class TeleportViewController extends AngularViewController<TeleportScope>
 	
 	function get_ship():Ship
 	{
-		var game:GameScene = cast MilkshakeGame.instance.sceneManager.currentScene;
+		var game:GameScene = cast MilkshakeGame.instance.sceneManager.scenes.get('game');
 		return game.ship;
 	}
 }

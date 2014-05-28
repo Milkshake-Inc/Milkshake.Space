@@ -4,7 +4,7 @@ package entities.ship;
  * @author Milkshake-Inc
  */
  
-typedef ShipData =
+typedef ShipBlueprint =
 {
 	id:String,
 	modules:Array<ModuleData>

@@ -60,7 +60,7 @@ class SpaceGame extends MilkshakeGame
 		sceneManager.addScene("game", new GameScene(this));
 		sceneManager.addScene("shipbuilder", new ShipBuilderScene(this));
 		
-		sceneManager.changeScene("roomListScene");
+		sceneManager.changeScene("game");
 	}
 
 	override public function update(delta:Float):Void
