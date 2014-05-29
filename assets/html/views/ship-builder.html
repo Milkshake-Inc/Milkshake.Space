@@ -1,0 +1,9 @@
+<div id="ship-builder" class="view" ng-show="isOpen" ng-controller="views.shipbuilder.ShipBuilderViewController">
+	<div class="iconbar">
+		<ul>
+			<li class="ship-part" ng-repeat="part in shipParts">
+				<img ng-src="{{part.url}}">
+			</li>
+		</ul>
+	</div>
+</div>
